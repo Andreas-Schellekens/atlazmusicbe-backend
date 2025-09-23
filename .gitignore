@@ -1,0 +1,28 @@
+# filepath: c:\Users\Schel\Documents\PersonlijkeProjecten\Atlaz_website\atlazmusicbe-backend\.gitignore
+# virtual environment
+.venv/
+venv/
+ENV/
+env/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# dotenv / secrets
+.env
+.env.* 
+
+# sqlite DB
+*.db
+dev.db
+*.sqlite3
+
+# VS Code
+.vscode/
+
+# OS
+Thumbs.db
+desktop.ini

@@ -3,8 +3,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# support both names, prefer DB_CONNECTION, fall back to DATABASE_URL
 db_connection = os.environ.get('DB_CONNECTION') or os.environ.get('DATABASE_URL')
 docs_url = os.environ.get('DOCS_URL', None)
-# provide empty string default so splitting is safe in main
-allowed_origins = os.environ.get("ALLOWED_ORIGINS", "")
+
+# keep raw string from env; use "*" to allow all origins
+allowed_origins = os.environ.get("ALLOWED_ORIGINS", "*")
+
+# allow credentials? default False (safer — required to be False when origins is "*")
+allow_credentials = os.environ.get("ALLOW_CREDENTIALS", "False").lower() in ("1", "true", "yes")

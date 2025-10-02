@@ -9,8 +9,8 @@ events = Table(
     metadata,
     Column("id", Integer, primary_key=True),
     Column("date", Date, nullable=False),
-    Column("start", Time, nullable=False),
-    Column("end", Time, nullable=False),
+    Column("start", Time, nullable=True),
+    Column("end", Time, nullable=True),
     Column("name", String, nullable=False),
     Column("venue", String, nullable=False),
     Column("link", String, nullable=True),
@@ -18,11 +18,17 @@ events = Table(
 
 class EventIn(BaseModel):
     date: str       # "YYYY-MM-DD"
-    start: str      # "HH:MM"
-    end: str        # "HH:MM"
+    start: Optional[str] = None      # "HH:MM" or None
+    end: Optional[str] = None        # "HH:MM" or None
     name: str
     venue: str
     link: Optional[str] = None
 
-class EventOut(EventIn):
+class EventOut(BaseModel):
     id: int
+    date: str
+    start: Optional[str] = None
+    end: Optional[str] = None
+    name: str
+    venue: str
+    link: Optional[str] = None

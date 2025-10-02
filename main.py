@@ -5,7 +5,7 @@ import config
 
 app = FastAPI(docs_url=config.docs_url)
 
-# interpret allowed_origins config
+# interpret allowed_origins config (string -> list)
 raw = config.allowed_origins or ""
 origins = [o.strip() for o in raw.split(",") if o.strip()]
 
@@ -13,10 +13,9 @@ origins = [o.strip() for o in raw.split(",") if o.strip()]
 if raw.strip() == "*":
     origins = ["*"]
 
-# if origins is wildcard, credentials must be False (cannot use '*' with credentials)
+# enforce no credentials for wildcard or by config
 allow_credentials = bool(config.allow_credentials)
 if origins == ["*"] and allow_credentials:
-    # override to safe default for wildcard
     allow_credentials = False
 
 app.add_middleware(
